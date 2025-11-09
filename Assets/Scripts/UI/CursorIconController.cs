@@ -3,13 +3,10 @@ using UnityEngine.UI;
 
 public class CursorIconController : MonoBehaviour
 {
-    public Image cursorImage; // UI Image (Raycast Target OFF)
+    public Image cursorImage;
     public Canvas canvas;
 
-    void Awake()
-    {
-        if (cursorImage) cursorImage.enabled = false;
-    }
+    void Awake() { if (cursorImage) cursorImage.enabled = false; }
 
     public void Show(Sprite s)
     {
@@ -19,14 +16,11 @@ public class CursorIconController : MonoBehaviour
         cursorImage.enabled = s != null;
     }
 
-    public void Hide()
-    {
-        if (cursorImage) cursorImage.enabled = false;
-    }
+    public void Hide() { if (cursorImage) cursorImage.enabled = false; }
 
     void LateUpdate()
     {
-        if (!cursorImage || !cursorImage.enabled) return;
-        cursorImage.rectTransform.position = Input.mousePosition;
+        if (cursorImage && cursorImage.enabled)
+            cursorImage.rectTransform.position = Input.mousePosition;
     }
 }

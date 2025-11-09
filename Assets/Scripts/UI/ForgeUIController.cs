@@ -5,29 +5,33 @@ using TMPro;
 
 public class ForgeUIController : MonoBehaviour
 {
+    [Header("Grid")]
     public GridLayoutGroup gridLayout;
     public Button cellTemplate;
+
+    [Header("Actions")]
     public Button forgeButton;
     public Button deliverButton;
 
+    [Header("Feedback")]
     public GameObject feedbackCoin;
     public GameObject feedbackAngry;
 
+    [Header("Result Output")]
     public Image resultImage;
     public Text resultLabel;            public TMP_Text resultLabelTMP;
     public Text movesLabel;             public TMP_Text movesLabelTMP;
 
     [Header("Requested HUD")]
     public Image requestedImage;
-    public Text requestedLabel;          public TMP_Text requestedLabelTMP;
-    public Text scoreLabel;              public TMP_Text scoreLabelTMP;
-    public Text timerLabel;              public TMP_Text timerLabelTMP;
+    public Text requestedLabel;         public TMP_Text requestedLabelTMP;
+    public Text scoreLabel;             public TMP_Text scoreLabelTMP;
+    public Text timerLabel;             public TMP_Text timerLabelTMP;
 
-    [Header("Material Sprites")]
-    public Sprite ironSprite;
-    public Sprite woodSprite;
-    public Sprite diamondSprite;
-    public Sprite emptySprite;
+    [Header("Materials DB & Selector")]
+    public MaterialDatabase materialDB;
+    public Transform selectorContainer;
+    public Button selectorButtonTemplate; // Button con hijo Image llamado "Icon"
 
     [Header("Cursor Icon")]
     public CursorIconController cursorIcon;
@@ -36,43 +40,14 @@ public class ForgeUIController : MonoBehaviour
     private Button[,] buttons;
     private const string IconChildName = "Icon";
 
+    // ---------- Public API ----------
     public void Bind(ForgeManager mgr)
     {
         manager = mgr;
         BuildGrid(manager.Grid.Width, manager.Grid.Height);
-        forgeButton.onClick.AddListener(manager.TryForge);
-        if (deliverButton != null) deliverButton.onClick.AddListener(manager.Deliver);
-    }
-
-    void BuildGrid(int w, int h)
-    {
-        foreach (Transform c in gridLayout.transform) Destroy(c.gameObject);
-        buttons = new Button[w, h];
-
-        for (int y = 0; y < h; y++)
-        for (int x = 0; x < w; x++)
-        {
-            var btn = Instantiate(cellTemplate, gridLayout.transform);
-            btn.gameObject.SetActive(true);
-
-            var t = btn.GetComponentInChildren<Text>(true); if (t) t.text = "";
-            var tt = btn.GetComponentInChildren<TMP_Text>(true); if (tt) tt.text = "";
-
-            int cx = x, cy = y;
-            btn.onClick.AddListener(() => manager.PlaceMaterial(cx, cy));
-
-            var trig = btn.gameObject.AddComponent<EventTrigger>();
-            var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
-            entry.callback.AddListener((ev) =>
-            {
-                var ped = (PointerEventData)ev;
-                if (ped.button == PointerEventData.InputButton.Right)
-                    manager.RemoveMaterial(cx, cy);
-            });
-            trig.triggers.Add(entry);
-
-            buttons[x, y] = btn;
-        }
+        BuildMaterialSelector();
+        if (forgeButton)  forgeButton.onClick.AddListener(manager.TryForge);
+        if (deliverButton) deliverButton.onClick.AddListener(manager.Deliver);
     }
 
     public void UpdateGrid()
@@ -89,27 +64,26 @@ public class ForgeUIController : MonoBehaviour
             if (icon != null)
             {
                 var cell = manager.Grid.Cells[x, y];
-                var type = cell == null ? MaterialType.None : cell.Type;
-                icon.sprite = GetSprite(type);
+                var sprite = cell != null && cell.Definition != null ? cell.Definition.icon : null;
+                icon.sprite = sprite;
                 icon.preserveAspect = true;
-                icon.color = icon.sprite ? Color.white : new Color(1,1,1,0.2f);
+                icon.color = sprite ? Color.white : new Color(1, 1, 1, 0.2f);
+                icon.enabled = true;
             }
-
-            var t = btn.GetComponentInChildren<Text>(true); if (t) t.text = "";
-            var tt = btn.GetComponentInChildren<TMP_Text>(true); if (tt) tt.text = "";
         }
     }
 
     public void UpdateMoves(int moves)
     {
-        if (movesLabel) movesLabel.text = "Moves: " + moves;
-        if (movesLabelTMP) movesLabelTMP.text = "Moves: " + moves;
+        if (movesLabel)     movesLabel.text     = "Moves: " + moves;
+        if (movesLabelTMP)  movesLabelTMP.text  = "Moves: " + moves;
     }
 
     public void ShowForgeResult(string name, Sprite sprite, bool success)
     {
-        if (resultLabel) resultLabel.text = name;
+        if (resultLabel)    resultLabel.text    = name;
         if (resultLabelTMP) resultLabelTMP.text = name;
+
         if (resultImage)
         {
             resultImage.sprite = sprite;
@@ -121,15 +95,16 @@ public class ForgeUIController : MonoBehaviour
 
     public void ClearForgeResult()
     {
-        if (resultLabel) resultLabel.text = "";
+        if (resultLabel)    resultLabel.text    = "";
         if (resultLabelTMP) resultLabelTMP.text = "";
         if (resultImage) { resultImage.sprite = null; resultImage.enabled = false; }
     }
 
     public void ShowRequested(string name, Sprite sprite)
     {
-        if (requestedLabel) requestedLabel.text = name;
+        if (requestedLabel)    requestedLabel.text    = name;
         if (requestedLabelTMP) requestedLabelTMP.text = name;
+
         if (requestedImage)
         {
             requestedImage.sprite = sprite;
@@ -140,14 +115,14 @@ public class ForgeUIController : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        if (scoreLabel) scoreLabel.text = "Score: " + score;
+        if (scoreLabel)    scoreLabel.text    = "Score: " + score;
         if (scoreLabelTMP) scoreLabelTMP.text = "Score: " + score;
     }
 
     public void UpdateTimer(float t)
     {
         string txt = "Time: " + Mathf.CeilToInt(t) + "s";
-        if (timerLabel) timerLabel.text = txt;
+        if (timerLabel)    timerLabel.text    = txt;
         if (timerLabelTMP) timerLabelTMP.text = txt;
     }
 
@@ -159,32 +134,102 @@ public class ForgeUIController : MonoBehaviour
         Invoke(nameof(HideFeedback), 1.2f);
     }
 
+    public void ShowCursor(Sprite s) { if (cursorIcon) cursorIcon.Show(s); }
+    public void HideCursor()         { if (cursorIcon) cursorIcon.Hide(); }
+
+    // ---------- Internals ----------
     void HideFeedback()
     {
         if (feedbackCoin)  feedbackCoin.SetActive(false);
         if (feedbackAngry) feedbackAngry.SetActive(false);
     }
 
-    public void ShowCursorFor(MaterialType type)
+    void BuildGrid(int w, int h)
     {
-        if (!cursorIcon) return;
-        cursorIcon.Show(GetSprite(type));
-    }
+        foreach (Transform c in gridLayout.transform) Destroy(c.gameObject);
+        buttons = new Button[w, h];
 
-    public void HideCursor()
-    {
-        if (!cursorIcon) return;
-        cursorIcon.Hide();
-    }
-
-    Sprite GetSprite(MaterialType type)
-    {
-        switch (type)
+        for (int y = 0; y < h; y++)
+        for (int x = 0; x < w; x++)
         {
-            case MaterialType.Iron: return ironSprite;
-            case MaterialType.Wood: return woodSprite;
-            case MaterialType.Diamond:  return diamondSprite;
-            default: return emptySprite;
+            var btn = Instantiate(cellTemplate, gridLayout.transform);
+            btn.gameObject.SetActive(true);
+
+            var t  = btn.GetComponentInChildren<Text>(true);     if (t)  t.text  = "";
+            var tt = btn.GetComponentInChildren<TMP_Text>(true); if (tt) tt.text = "";
+
+            int cx = x, cy = y;
+            btn.onClick.AddListener(() => manager.PlaceMaterial(cx, cy));
+
+            var trig  = btn.gameObject.AddComponent<EventTrigger>();
+            var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
+            entry.callback.AddListener((ev) =>
+            {
+                var ped = (PointerEventData)ev;
+                if (ped.button == PointerEventData.InputButton.Right)
+                    manager.RemoveMaterial(cx, cy);
+            });
+            trig.triggers.Add(entry);
+
+            buttons[x, y] = btn;
         }
+    }
+
+    void BuildMaterialSelector()
+    {
+        if (!selectorContainer || !selectorButtonTemplate || materialDB == null) return;
+
+        foreach (Transform c in selectorContainer) Destroy(c.gameObject);
+
+        foreach (var mat in materialDB.materials)
+        {
+            if (!mat) continue;
+
+            var btn = Instantiate(selectorButtonTemplate, selectorContainer);
+
+            // Activa todo el clon (root + hijos), aunque el template esté apagado
+            ActivateHierarchy(btn.gameObject);
+
+            // Garantiza que el Button esté habilitado e interactuable
+            var buttonComp = btn.GetComponent<Button>();
+            if (buttonComp)
+            {
+                buttonComp.enabled = true;
+                buttonComp.interactable = true;
+                if (buttonComp.targetGraphic) buttonComp.targetGraphic.enabled = true;
+            }
+
+            // Busca/crea el Image "Icon"
+            Image img = null;
+            var iconTr = btn.transform.Find(IconChildName);
+            if (iconTr) img = iconTr.GetComponent<Image>();
+            if (!img)   img = btn.GetComponent<Image>();
+            if (!img)
+            {
+                var go = new GameObject(IconChildName, typeof(RectTransform), typeof(Image));
+                go.transform.SetParent(btn.transform, false);
+                var rt = (RectTransform)go.transform;
+                rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
+                rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
+                img = go.GetComponent<Image>();
+            }
+
+            // Asegura que la imagen esté visible
+            img.enabled = true;
+            img.sprite = mat.icon;
+            img.preserveAspect = true;
+            img.color = Color.white;
+
+            btn.onClick.AddListener(() => manager.SetSelectedMaterial(mat));
+        }
+    }
+
+    // Activa recursivamente root e hijos (útil cuando el template está desactivado)
+    void ActivateHierarchy(GameObject go)
+    {
+        if (!go.activeSelf) go.SetActive(true);
+        var trs = go.GetComponentsInChildren<Transform>(true);
+        foreach (var t in trs)
+            if (!t.gameObject.activeSelf) t.gameObject.SetActive(true);
     }
 }
