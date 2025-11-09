@@ -1,0 +1,21 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild*/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+SysInfo.txt
+
+# Project files generados por IDE
+.vs/
+*.csproj
+*.sln
+*.user
+*.pidb
+*.pdb
+
+# SO
+.DS_Store
+Thumbs.db

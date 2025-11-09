@@ -1,0 +1,147 @@
+using UnityEngine;
+
+public class ForgeManager : MonoBehaviour
+{
+    public RecipeBook recipeBook;
+    public ForgeUIController ui;
+
+    public int gridSize = 3;
+    public int movesStart = 12;
+
+    public GridModel Grid { get; private set; }
+    public int MovesLeft { get; private set; }
+    public int Score { get; private set; }
+    public MaterialType SelectedType { get; private set; } = MaterialType.Iron;
+
+    private Recipe requested;     // lo que nos piden
+    private Recipe currentCraft;  // lo que forjamos
+    private float timeLeft;
+
+    void Start()
+    {
+        Grid = new GridModel(gridSize, gridSize);
+        MovesLeft = movesStart;
+        ui.Bind(this);
+        ui.UpdateGrid();
+        ui.UpdateMoves(MovesLeft);
+        ui.UpdateScore(Score);
+        StartNewOrder();
+        ui.ShowCursorFor(SelectedType);
+    }
+
+    void Update()
+    {
+        if (requested == null) return;
+        if (timeLeft > 0f)
+        {
+            timeLeft -= Time.deltaTime;
+            ui.UpdateTimer(timeLeft);
+            if (timeLeft <= 0f)
+            {
+                OnOrderTimeout();
+            }
+        }
+    }
+
+    void StartNewOrder()
+    {
+        requested = recipeBook != null ? recipeBook.GetRandom() : null;
+        currentCraft = null;
+
+        Grid.ClearAll();
+        ui.UpdateGrid();
+        MovesLeft = movesStart;
+        ui.UpdateMoves(MovesLeft);
+        ui.ClearForgeResult();
+
+        if (requested != null)
+        {
+            timeLeft = Mathf.Max(1f, requested.TimeLimit);
+            ui.ShowRequested(requested.ResultName, requested.ResultSprite);
+            ui.UpdateTimer(timeLeft);
+        }
+        else
+        {
+            timeLeft = 0f;
+            ui.ShowRequested("No Recipes", null);
+            ui.UpdateTimer(0f);
+        }
+    }
+
+    public void SetSelectedType(int type)
+    {
+        SelectedType = (MaterialType)type;
+        ui.ShowCursorFor(SelectedType);
+    }
+
+    public void PlaceMaterial(int x, int y)
+    {
+        if(MovesLeft<=0) return;
+        if(Grid.IsEmpty(x,y))
+        {
+            if(Grid.Place(x,y,new MaterialToken(SelectedType)))
+            { MovesLeft--; ui.UpdateGrid(); ui.UpdateMoves(MovesLeft); }
+        }
+    }
+
+    public void RemoveMaterial(int x, int y)
+    {
+        if(MovesLeft<=0) return;
+        if(!Grid.IsEmpty(x,y))
+        {
+            if(Grid.ClearCell(x,y))
+            { MovesLeft--; ui.UpdateGrid(); ui.UpdateMoves(MovesLeft); }
+        }
+    }
+
+    public void TryForge()
+    {
+        ui.HideCursor();
+        currentCraft = recipeBook != null ? recipeBook.FindMatch(Grid.Cells) : null;
+
+        if (currentCraft != null)
+        {
+            Grid.ClearAll();
+            ui.UpdateGrid();
+            ui.ShowForgeResult(currentCraft.ResultName, currentCraft.ResultSprite, true);
+        }
+        else
+        {
+            ui.ShowForgeResult("Invalid Craft", null, false);
+        }
+    }
+
+    public void Deliver()
+    {
+        if (currentCraft == null)
+        {
+            ui.ShowFeedback(false);
+            return;
+        }
+
+        bool correct = (requested != null && currentCraft.ResultName == requested.ResultName);
+        if (correct)
+        {
+            Score += requested.Points;
+            ui.UpdateScore(Score);
+            ui.ShowFeedback(true);
+        }
+        else
+        {
+            ui.ShowFeedback(false);
+        }
+
+        ui.ClearForgeResult();
+        ui.ShowCursorFor(SelectedType);
+        StartNewOrder();
+    }
+
+    void OnOrderTimeout()
+    {
+        // pedido fallido por tiempo
+        ui.ShowFeedback(false);
+        ui.ClearForgeResult();
+        ui.ShowCursorFor(SelectedType);
+        StartNewOrder();
+    }
+}
