@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d071a7504341a4c42bf44e8b76926c4b
+guid: 3394f2c3a8aba024caa866b2b7d895f1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -306787472437928336
-    second: stick_0
+      213: -7617676475710481790
+    second: wooden_hoe_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: stick_0
+      name: wooden_hoe_0
       rect:
         serializedVersion: 2
         x: 5
         y: 2
-        width: 41
-        height: 41
+        width: 38
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07e1cc35b621ebbf0800000000000000
-      internalID: -306787472437928336
+      spriteID: 28a5d630b93984690800000000000000
+      internalID: -7617676475710481790
       vertices: []
       indices: 
       edges: []
@@ -134,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      stick_0: -306787472437928336
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

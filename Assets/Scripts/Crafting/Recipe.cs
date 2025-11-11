@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -41,7 +42,17 @@ public class Recipe
         return true;
     }
 
-    // Utilidad pública: ajusta el tamaño del Pattern a Width*Height
+    // ★ Nuevo: devuelve materiales únicos requeridos por la receta
+    public List<MaterialDefinition> GetRequiredMaterials()
+    {
+        var set = new HashSet<MaterialDefinition>();
+        if (Pattern != null)
+            foreach (var m in Pattern)
+                if (m != null) set.Add(m);
+        return new List<MaterialDefinition>(set);
+    }
+
+    // Utilidad: asegura tamaño del Pattern (la usa RecipeBook.OnValidate)
     public void FixPatternSize()
     {
         int target = Mathf.Max(1, Width) * Mathf.Max(1, Height);

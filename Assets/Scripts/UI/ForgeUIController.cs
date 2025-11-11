@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -40,13 +41,18 @@ public class ForgeUIController : MonoBehaviour
     private Button[,] buttons;
     private const string IconChildName = "Icon";
 
+    // Solo destruimos lo que nosotros instanciamos aquí
+    private readonly List<GameObject> spawnedSelectorButtons = new List<GameObject>();
+
     // ---------- Public API ----------
     public void Bind(ForgeManager mgr)
     {
         manager = mgr;
+        if (selectorButtonTemplate) selectorButtonTemplate.gameObject.SetActive(false);
+
         BuildGrid(manager.Grid.Width, manager.Grid.Height);
-        BuildMaterialSelector();
-        if (forgeButton)  forgeButton.onClick.AddListener(manager.TryForge);
+        BuildSelectorAllFromDatabase();               // inicial por si aún no hay receta
+        if (forgeButton)   forgeButton.onClick.AddListener(manager.TryForge);
         if (deliverButton) deliverButton.onClick.AddListener(manager.Deliver);
     }
 
@@ -137,6 +143,97 @@ public class ForgeUIController : MonoBehaviour
     public void ShowCursor(Sprite s) { if (cursorIcon) cursorIcon.Show(s); }
     public void HideCursor()         { if (cursorIcon) cursorIcon.Hide(); }
 
+    // ---------- Selector dinámico ----------
+    public void UpdateSelectorForRecipe(Recipe recipe)
+    {
+        if (recipe == null)
+        {
+            BuildSelectorAllFromDatabase();
+            return;
+        }
+
+        var mats = recipe.GetRequiredMaterials();
+        if (mats == null || mats.Count == 0)
+        {
+            BuildSelectorAllFromDatabase();
+            return;
+        }
+
+        BuildSelectorFromList(mats);
+        if (mats.Count > 0 && manager != null && mats[0] != null)
+            manager.SetSelectedMaterial(mats[0]);
+    }
+
+    void BuildSelectorAllFromDatabase()
+    {
+        if (materialDB == null) { ClearSelectorButtons(); return; }
+        BuildSelectorFromList(materialDB.materials);
+    }
+
+    void ClearSelectorButtons()
+    {
+        foreach (var go in spawnedSelectorButtons)
+            if (go) Destroy(go);
+        spawnedSelectorButtons.Clear();
+
+        // no tocamos otros hijos del contenedor (fondos, placeholders, etc.)
+    }
+
+    void BuildSelectorFromList(IList<MaterialDefinition> list)
+    {
+        if (!selectorContainer || !selectorButtonTemplate) return;
+
+        ClearSelectorButtons();
+
+        if (list == null) return;
+
+        // Evitar duplicados (p. ej., patrón con el mismo material repetido)
+        var unique = new HashSet<MaterialDefinition>();
+        foreach (var m in list) if (m) unique.Add(m);
+
+        foreach (var mat in unique)
+        {
+            var btn = Instantiate(selectorButtonTemplate, selectorContainer);
+            ActivateHierarchy(btn.gameObject);  // activa root + hijos
+
+            // Garantiza que el Button esté operativo
+            var buttonComp = btn.GetComponent<Button>();
+            if (buttonComp)
+            {
+                buttonComp.enabled = true;
+                buttonComp.interactable = true;
+                if (buttonComp.targetGraphic) buttonComp.targetGraphic.enabled = true;
+            }
+
+            // Imagen del icono
+            Image img = null;
+            var iconTr = btn.transform.Find(IconChildName);
+            if (iconTr) img = iconTr.GetComponent<Image>();
+            if (!img)   img = btn.GetComponent<Image>();
+            if (!img)
+            {
+                var go = new GameObject(IconChildName, typeof(RectTransform), typeof(Image));
+                go.transform.SetParent(btn.transform, false);
+                var rt = (RectTransform)go.transform;
+                rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
+                rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
+                img = go.GetComponent<Image>();
+            }
+
+            img.enabled = true;
+            img.sprite = mat.icon;
+            img.preserveAspect = true;
+            img.color = Color.white;
+
+            btn.onClick.AddListener(() => manager.SetSelectedMaterial(mat));
+            spawnedSelectorButtons.Add(btn.gameObject);
+        }
+
+        // refrescar layout
+        var rtContainer = selectorContainer as RectTransform;
+        if (rtContainer) LayoutRebuilder.ForceRebuildLayoutImmediate(rtContainer);
+    }
+
     // ---------- Internals ----------
     void HideFeedback()
     {
@@ -175,56 +272,6 @@ public class ForgeUIController : MonoBehaviour
         }
     }
 
-    void BuildMaterialSelector()
-    {
-        if (!selectorContainer || !selectorButtonTemplate || materialDB == null) return;
-
-        foreach (Transform c in selectorContainer) Destroy(c.gameObject);
-
-        foreach (var mat in materialDB.materials)
-        {
-            if (!mat) continue;
-
-            var btn = Instantiate(selectorButtonTemplate, selectorContainer);
-
-            // Activa todo el clon (root + hijos), aunque el template esté apagado
-            ActivateHierarchy(btn.gameObject);
-
-            // Garantiza que el Button esté habilitado e interactuable
-            var buttonComp = btn.GetComponent<Button>();
-            if (buttonComp)
-            {
-                buttonComp.enabled = true;
-                buttonComp.interactable = true;
-                if (buttonComp.targetGraphic) buttonComp.targetGraphic.enabled = true;
-            }
-
-            // Busca/crea el Image "Icon"
-            Image img = null;
-            var iconTr = btn.transform.Find(IconChildName);
-            if (iconTr) img = iconTr.GetComponent<Image>();
-            if (!img)   img = btn.GetComponent<Image>();
-            if (!img)
-            {
-                var go = new GameObject(IconChildName, typeof(RectTransform), typeof(Image));
-                go.transform.SetParent(btn.transform, false);
-                var rt = (RectTransform)go.transform;
-                rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
-                rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
-                img = go.GetComponent<Image>();
-            }
-
-            // Asegura que la imagen esté visible
-            img.enabled = true;
-            img.sprite = mat.icon;
-            img.preserveAspect = true;
-            img.color = Color.white;
-
-            btn.onClick.AddListener(() => manager.SetSelectedMaterial(mat));
-        }
-    }
-
-    // Activa recursivamente root e hijos (útil cuando el template está desactivado)
     void ActivateHierarchy(GameObject go)
     {
         if (!go.activeSelf) go.SetActive(true);

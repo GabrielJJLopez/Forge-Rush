@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1aa0cd1963153874e85c1bfffe6ca1d2
+guid: 4c82ea9fbcb8985489408391f7dbf8a2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3407370344319501966
-    second: diamond_hoe_0
+      213: 9037903409312229848
+    second: diamond_shovel 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: diamond_hoe_0
+      name: diamond_shovel 1_0
       rect:
         serializedVersion: 2
         x: 5
         y: 2
-        width: 38
-        height: 44
+        width: 41
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 279b2a099b696b0d0800000000000000
-      internalID: -3407370344319501966
+      spriteID: 8d9e85214451d6d70800000000000000
+      internalID: 9037903409312229848
       vertices: []
       indices: 
       edges: []
@@ -134,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      diamond_hoe_0: -3407370344319501966
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d6b8ddb57ea0c41489f95e17f9396e87
+guid: 9260bb7e5d46a0d45bc1a4c5a19b570d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6586461156150141773
-    second: diamond_0
+      213: 7768654303352168875
+    second: stone_pickaxe_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,16 +96,29 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: diamond_0
+      name: stone_pickaxe_0
       rect:
         serializedVersion: 2
         x: 5
         y: 2
-        width: 38
+        width: 41
         height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d43ec33668fc76b50800000000000000
-      internalID: 6586461156150141773
+      spriteID: ba1ad16cdedcfcb60800000000000000
+      internalID: 7768654303352168875
       vertices: []
       indices: 
       edges: []
@@ -134,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      diamond_0: 6586461156150141773
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

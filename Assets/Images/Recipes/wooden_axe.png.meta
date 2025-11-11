@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1a83c61d4e1fbd44c99a058f91a2c2a5
+guid: 2901295c1c6f1e64597806b43c9306c6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4285704637475842466
-    second: iron_ingot_0
+      213: 5010787112377136037
+    second: wooden_axe_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: iron_ingot_0
+      name: wooden_axe_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 5
-        width: 48
-        height: 38
+        x: 5
+        y: 2
+        width: 38
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e56120fb65e1684c0800000000000000
-      internalID: -4285704637475842466
+      spriteID: 5a338569454e98540800000000000000
+      internalID: 5010787112377136037
       vertices: []
       indices: 
       edges: []
@@ -134,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      iron_ingot_0: -4285704637475842466
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

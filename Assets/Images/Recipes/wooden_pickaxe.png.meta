@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ab6d2f89c95661f448de238a480756f7
+guid: 2e2304031957fca4695a95d175762447
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7168418791340479755
-    second: iron_pickaxe_0
+      213: -3867017715014690049
+    second: wooden_pickaxe_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,11 +96,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: iron_pickaxe_0
+      name: wooden_pickaxe_0
       rect:
         serializedVersion: 2
         x: 5
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b05951b29e65b7360800000000000000
-      internalID: 7168418791340479755
+      spriteID: ffa186460e7955ac0800000000000000
+      internalID: -3867017715014690049
       vertices: []
       indices: 
       edges: []
@@ -134,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      iron_pickaxe_0: 7168418791340479755
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

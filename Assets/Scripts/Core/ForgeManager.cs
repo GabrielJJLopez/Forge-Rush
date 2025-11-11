@@ -22,11 +22,13 @@ public class ForgeManager : MonoBehaviour
     {
         Grid = new GridModel(gridSize, gridSize);
         MovesLeft = movesStart;
+
         ui.Bind(this);
         ui.UpdateGrid();
         ui.UpdateMoves(MovesLeft);
         ui.UpdateScore(Score);
 
+        // Si hay DB, selecciona el primero por defecto hasta que llegue la primera orden
         if (materialDB != null && materialDB.materials.Count > 0)
             SetSelectedMaterial(materialDB.materials[0]);
 
@@ -115,12 +117,18 @@ public class ForgeManager : MonoBehaviour
             timeLeft = Mathf.Max(1f, requested.TimeLimit);
             ui.ShowRequested(requested.ResultName, requested.ResultSprite);
             ui.UpdateTimer(timeLeft);
+
+            // ★ Actualiza el selector para mostrar SOLO los materiales requeridos
+            ui.UpdateSelectorForRecipe(requested);
         }
         else
         {
             timeLeft = 0f;
             ui.ShowRequested("No Recipes", null);
             ui.UpdateTimer(0f);
+
+            // Si no hay orden, lista todos los materiales de la DB
+            ui.UpdateSelectorForRecipe(null);
         }
     }
 

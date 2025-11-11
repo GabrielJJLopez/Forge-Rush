@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b528a6fa05fc13419190bcaf2da9061, type: 3}
-  m_Name: Wood
+  m_Name: Stick
   m_EditorClassIdentifier: 
-  id: wood
-  displayName: wood
+  id: stick
+  displayName: stick
   icon: {fileID: -306787472437928336, guid: d071a7504341a4c42bf44e8b76926c4b, type: 3}

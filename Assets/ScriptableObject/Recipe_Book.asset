@@ -13,6 +13,38 @@ MonoBehaviour:
   m_Name: Recipe_Book
   m_EditorClassIdentifier: 
   Recipes:
+  - ResultName: Wood Pickaxe
+    ResultSprite: {fileID: -3867017715014690049, guid: 2e2304031957fca4695a95d175762447, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 5
+    TimeLimit: 15
+  - ResultName: Stone Pickaxe
+    ResultSprite: {fileID: 7768654303352168875, guid: 9260bb7e5d46a0d45bc1a4c5a19b570d, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 10
+    TimeLimit: 15
   - ResultName: Iron Pickaxe
     ResultSprite: {fileID: 7168418791340479755, guid: ab6d2f89c95661f448de238a480756f7, type: 3}
     Width: 3
@@ -29,3 +61,115 @@ MonoBehaviour:
     - {fileID: 0}
     Points: 10
     TimeLimit: 15
+  - ResultName: Gold Pickaxe
+    ResultSprite: {fileID: 4865815385165745197, guid: c4c0e6ae9391e22428717aa867dacac4, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 12
+    TimeLimit: 11
+  - ResultName: Diamond Pickaxe
+    ResultSprite: {fileID: -5563659230636437988, guid: d4e7f3082e1ba2440b42c4ec3f3ff929, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Wood Hoe
+    ResultSprite: {fileID: -7617676475710481790, guid: 3394f2c3a8aba024caa866b2b7d895f1, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Stone Hoe
+    ResultSprite: {fileID: 6092535966205832212, guid: 7583b2eb406b73c479bb53c5a643d505, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Iron Hoe
+    ResultSprite: {fileID: -8585210977546089588, guid: 81df794ab404fd04c853102b8b74df4b, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 7a41b0dc8afbec643b6fb0a3b48941db, type: 2}
+    - {fileID: 11400000, guid: 7a41b0dc8afbec643b6fb0a3b48941db, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Gold Hoe
+    ResultSprite: {fileID: -7243391486315307900, guid: cbb81e7a5b989254daa256ade713e56b, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Diamond Hoe
+    ResultSprite: {fileID: -4744404619077654746, guid: a177c48851b5187448b5a691d49842ab, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
