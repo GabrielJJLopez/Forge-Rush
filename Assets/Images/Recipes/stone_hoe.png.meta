@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      stone_hoe_0: 6092535966205832212
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

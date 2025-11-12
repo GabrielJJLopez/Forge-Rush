@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wooden_shovel_0: -4906887308045457483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

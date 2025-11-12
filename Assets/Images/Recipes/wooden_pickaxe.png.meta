@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wooden_pickaxe_0: -3867017715014690049
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

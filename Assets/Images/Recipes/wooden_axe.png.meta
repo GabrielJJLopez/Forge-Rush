@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wooden_axe_0: 5010787112377136037
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

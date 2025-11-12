@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      diamond_hoe 1_0: -4744404619077654746
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

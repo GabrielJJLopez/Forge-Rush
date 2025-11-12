@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      wooden_hoe_0: -7617676475710481790
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

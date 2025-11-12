@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      iron_hoe_0: -8585210977546089588
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

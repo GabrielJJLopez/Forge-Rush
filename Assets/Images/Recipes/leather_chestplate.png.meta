@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      leather_chestplate_0: 972524890855885471
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
