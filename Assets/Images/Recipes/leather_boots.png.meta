@@ -119,42 +119,20 @@ TextureImporter:
       name: leather_boots_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 8
-        width: 20
-        height: 32
+        x: 3
+        y: 9
+        width: 42
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ea97beab2203e1180800000000000000
-      internalID: -9142817267792512594
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: leather_boots_1
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 8
-        width: 20
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 671e01373807eea80800000000000000
-      internalID: -8435681342144847498
+      spriteID: cbb19cdd4bf24c04ba23786197282d19
+      internalID: -2006058706
       vertices: []
       indices: 
       edges: []
@@ -163,7 +141,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b4e85dbd4e6ffb94b8a61e04dcdbf0ae
     internalID: 0
     vertices: []
     indices: 
@@ -172,7 +150,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      leather_boots_0: -2006058706
+      leather_boots_1: 1867851464
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

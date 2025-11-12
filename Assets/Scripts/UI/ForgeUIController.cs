@@ -20,40 +20,67 @@ public class ForgeUIController : MonoBehaviour
 
     [Header("Result Output")]
     public Image resultImage;
-    public Text resultLabel;            public TMP_Text resultLabelTMP;
-    public Text movesLabel;             public TMP_Text movesLabelTMP;
+    public Text resultLabel; public TMP_Text resultLabelTMP;
+    public Text movesLabel; public TMP_Text movesLabelTMP;
 
     [Header("Requested HUD")]
     public Image requestedImage;
-    public Text requestedLabel;         public TMP_Text requestedLabelTMP;
-    public Text scoreLabel;             public TMP_Text scoreLabelTMP;
-    public Text timerLabel;             public TMP_Text timerLabelTMP;
+    public Text requestedLabel; public TMP_Text requestedLabelTMP;
+    public Text scoreLabel; public TMP_Text scoreLabelTMP;
+    public Text timerLabel; public TMP_Text timerLabelTMP;
 
     [Header("Materials DB & Selector")]
     public MaterialDatabase materialDB;
     public Transform selectorContainer;
-    public Button selectorButtonTemplate; // Button con hijo Image llamado "Icon"
+    public Button selectorButtonTemplate;
 
     [Header("Cursor Icon")]
     public CursorIconController cursorIcon;
 
+    [Header("Recipe Window")]
+    public RecipeWindowUI recipeWindow;
+
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
+    public TMP_Text gameOverText;
+    public Button restartButton;
+
     private ForgeManager manager;
     private Button[,] buttons;
     private const string IconChildName = "Icon";
-
-    // Solo destruimos lo que nosotros instanciamos aquí
     private readonly List<GameObject> spawnedSelectorButtons = new List<GameObject>();
 
-    // ---------- Public API ----------
+    enum PaintMode { None, Place, Remove }
+    PaintMode paintMode = PaintMode.None;
+
     public void Bind(ForgeManager mgr)
     {
         manager = mgr;
         if (selectorButtonTemplate) selectorButtonTemplate.gameObject.SetActive(false);
-
         BuildGrid(manager.Grid.Width, manager.Grid.Height);
-        BuildSelectorAllFromDatabase();               // inicial por si aún no hay receta
-        if (forgeButton)   forgeButton.onClick.AddListener(manager.TryForge);
+        BuildSelectorAllFromDatabase();
+        if (forgeButton) forgeButton.onClick.AddListener(manager.TryForge);
         if (deliverButton) deliverButton.onClick.AddListener(manager.Deliver);
+        HideGameOver();
+    }
+
+    void Update()
+    {
+        if (paintMode != PaintMode.None)
+        {
+            bool holdingLeft = Input.GetMouseButton(0);
+            bool holdingRight = Input.GetMouseButton(1);
+            if (!holdingLeft && !holdingRight) paintMode = PaintMode.None;
+        }
+    }
+
+    void BeginPaint(PaintMode mode) { paintMode = mode; }
+    void EndPaint() { paintMode = PaintMode.None; }
+
+    void PaintCell(int x, int y)
+    {
+        if (paintMode == PaintMode.Place) manager.PlaceMaterial(x, y);
+        else if (paintMode == PaintMode.Remove) manager.RemoveMaterial(x, y);
     }
 
     public void UpdateGrid()
@@ -66,7 +93,6 @@ public class ForgeUIController : MonoBehaviour
             var iconTr = btn.transform.Find(IconChildName);
             if (iconTr != null) icon = iconTr.GetComponent<Image>();
             if (icon == null) icon = btn.GetComponent<Image>();
-
             if (icon != null)
             {
                 var cell = manager.Grid.Cells[x, y];
@@ -81,15 +107,14 @@ public class ForgeUIController : MonoBehaviour
 
     public void UpdateMoves(int moves)
     {
-        if (movesLabel)     movesLabel.text     = "Moves: " + moves;
-        if (movesLabelTMP)  movesLabelTMP.text  = "Moves: " + moves;
+        if (movesLabel) movesLabel.text = "Moves: " + moves;
+        if (movesLabelTMP) movesLabelTMP.text = "Moves: " + moves;
     }
 
     public void ShowForgeResult(string name, Sprite sprite, bool success)
     {
-        if (resultLabel)    resultLabel.text    = name;
+        if (resultLabel) resultLabel.text = name;
         if (resultLabelTMP) resultLabelTMP.text = name;
-
         if (resultImage)
         {
             resultImage.sprite = sprite;
@@ -101,16 +126,15 @@ public class ForgeUIController : MonoBehaviour
 
     public void ClearForgeResult()
     {
-        if (resultLabel)    resultLabel.text    = "";
+        if (resultLabel) resultLabel.text = "";
         if (resultLabelTMP) resultLabelTMP.text = "";
         if (resultImage) { resultImage.sprite = null; resultImage.enabled = false; }
     }
 
     public void ShowRequested(string name, Sprite sprite)
     {
-        if (requestedLabel)    requestedLabel.text    = name;
+        if (requestedLabel) requestedLabel.text = name;
         if (requestedLabelTMP) requestedLabelTMP.text = name;
-
         if (requestedImage)
         {
             requestedImage.sprite = sprite;
@@ -119,49 +143,44 @@ public class ForgeUIController : MonoBehaviour
         }
     }
 
+    public void ShowRequestedRecipe(Recipe recipe)
+    {
+        if (!recipeWindow) return;
+        if (recipe != null) recipeWindow.Render(recipe);
+        else recipeWindow.Clear();
+    }
+
     public void UpdateScore(int score)
     {
-        if (scoreLabel)    scoreLabel.text    = "Score: " + score;
+        if (scoreLabel) scoreLabel.text = "Score: " + score;
         if (scoreLabelTMP) scoreLabelTMP.text = "Score: " + score;
     }
 
     public void UpdateTimer(float t)
     {
         string txt = "Time: " + Mathf.CeilToInt(t) + "s";
-        if (timerLabel)    timerLabel.text    = txt;
+        if (timerLabel) timerLabel.text = txt;
         if (timerLabelTMP) timerLabelTMP.text = txt;
     }
 
     public void ShowFeedback(bool success)
     {
-        if (feedbackCoin)  feedbackCoin.SetActive(success);
+        if (feedbackCoin) feedbackCoin.SetActive(success);
         if (feedbackAngry) feedbackAngry.SetActive(!success);
-        CancelInvoke(nameof(HideFeedback));
-        Invoke(nameof(HideFeedback), 1.2f);
+        CancelInvoke("HideFeedback");
+        Invoke("HideFeedback", 1.2f);
     }
 
     public void ShowCursor(Sprite s) { if (cursorIcon) cursorIcon.Show(s); }
-    public void HideCursor()         { if (cursorIcon) cursorIcon.Hide(); }
+    public void HideCursor() { if (cursorIcon) cursorIcon.Hide(); }
 
-    // ---------- Selector dinámico ----------
     public void UpdateSelectorForRecipe(Recipe recipe)
     {
-        if (recipe == null)
-        {
-            BuildSelectorAllFromDatabase();
-            return;
-        }
-
+        if (recipe == null) { BuildSelectorAllFromDatabase(); return; }
         var mats = recipe.GetRequiredMaterials();
-        if (mats == null || mats.Count == 0)
-        {
-            BuildSelectorAllFromDatabase();
-            return;
-        }
-
+        if (mats == null || mats.Count == 0) { BuildSelectorAllFromDatabase(); return; }
         BuildSelectorFromList(mats);
-        if (mats.Count > 0 && manager != null && mats[0] != null)
-            manager.SetSelectedMaterial(mats[0]);
+        if (mats.Count > 0 && manager != null && mats[0] != null) manager.SetSelectedMaterial(mats[0]);
     }
 
     void BuildSelectorAllFromDatabase()
@@ -172,31 +191,24 @@ public class ForgeUIController : MonoBehaviour
 
     void ClearSelectorButtons()
     {
-        foreach (var go in spawnedSelectorButtons)
-            if (go) Destroy(go);
+        foreach (var go in spawnedSelectorButtons) if (go) Destroy(go);
         spawnedSelectorButtons.Clear();
-
-        // no tocamos otros hijos del contenedor (fondos, placeholders, etc.)
     }
 
     void BuildSelectorFromList(IList<MaterialDefinition> list)
     {
         if (!selectorContainer || !selectorButtonTemplate) return;
-
         ClearSelectorButtons();
-
         if (list == null) return;
 
-        // Evitar duplicados (p. ej., patrón con el mismo material repetido)
         var unique = new HashSet<MaterialDefinition>();
         foreach (var m in list) if (m) unique.Add(m);
 
         foreach (var mat in unique)
         {
             var btn = Instantiate(selectorButtonTemplate, selectorContainer);
-            ActivateHierarchy(btn.gameObject);  // activa root + hijos
+            ActivateHierarchy(btn.gameObject);
 
-            // Garantiza que el Button esté operativo
             var buttonComp = btn.GetComponent<Button>();
             if (buttonComp)
             {
@@ -205,11 +217,10 @@ public class ForgeUIController : MonoBehaviour
                 if (buttonComp.targetGraphic) buttonComp.targetGraphic.enabled = true;
             }
 
-            // Imagen del icono
             Image img = null;
             var iconTr = btn.transform.Find(IconChildName);
             if (iconTr) img = iconTr.GetComponent<Image>();
-            if (!img)   img = btn.GetComponent<Image>();
+            if (!img) img = btn.GetComponent<Image>();
             if (!img)
             {
                 var go = new GameObject(IconChildName, typeof(RectTransform), typeof(Image));
@@ -229,15 +240,13 @@ public class ForgeUIController : MonoBehaviour
             spawnedSelectorButtons.Add(btn.gameObject);
         }
 
-        // refrescar layout
         var rtContainer = selectorContainer as RectTransform;
         if (rtContainer) LayoutRebuilder.ForceRebuildLayoutImmediate(rtContainer);
     }
 
-    // ---------- Internals ----------
     void HideFeedback()
     {
-        if (feedbackCoin)  feedbackCoin.SetActive(false);
+        if (feedbackCoin) feedbackCoin.SetActive(false);
         if (feedbackAngry) feedbackAngry.SetActive(false);
     }
 
@@ -252,21 +261,49 @@ public class ForgeUIController : MonoBehaviour
             var btn = Instantiate(cellTemplate, gridLayout.transform);
             btn.gameObject.SetActive(true);
 
-            var t  = btn.GetComponentInChildren<Text>(true);     if (t)  t.text  = "";
+            var t = btn.GetComponentInChildren<Text>(true); if (t) t.text = "";
             var tt = btn.GetComponentInChildren<TMP_Text>(true); if (tt) tt.text = "";
 
             int cx = x, cy = y;
+
             btn.onClick.AddListener(() => manager.PlaceMaterial(cx, cy));
 
-            var trig  = btn.gameObject.AddComponent<EventTrigger>();
-            var entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
-            entry.callback.AddListener((ev) =>
+            var trig = btn.gameObject.AddComponent<EventTrigger>();
+
+            var onDown = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
+            onDown.callback.AddListener((ev) =>
             {
                 var ped = (PointerEventData)ev;
-                if (ped.button == PointerEventData.InputButton.Right)
-                    manager.RemoveMaterial(cx, cy);
+                if (ped.button == PointerEventData.InputButton.Left)
+                {
+                    BeginPaint(PaintMode.Place);
+                    PaintCell(cx, cy);
+                }
+                else if (ped.button == PointerEventData.InputButton.Right)
+                {
+                    BeginPaint(PaintMode.Remove);
+                    PaintCell(cx, cy);
+                }
             });
-            trig.triggers.Add(entry);
+            trig.triggers.Add(onDown);
+
+            var onEnter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+            onEnter.callback.AddListener((_) =>
+            {
+                if (paintMode != PaintMode.None) PaintCell(cx, cy);
+            });
+            trig.triggers.Add(onEnter);
+
+            var onDrag = new EventTrigger.Entry { eventID = EventTriggerType.Drag };
+            onDrag.callback.AddListener((_) =>
+            {
+                if (paintMode != PaintMode.None) PaintCell(cx, cy);
+            });
+            trig.triggers.Add(onDrag);
+
+            var onUp = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
+            onUp.callback.AddListener((_) => EndPaint());
+            trig.triggers.Add(onUp);
 
             buttons[x, y] = btn;
         }
@@ -276,7 +313,34 @@ public class ForgeUIController : MonoBehaviour
     {
         if (!go.activeSelf) go.SetActive(true);
         var trs = go.GetComponentsInChildren<Transform>(true);
-        foreach (var t in trs)
-            if (!t.gameObject.activeSelf) t.gameObject.SetActive(true);
+        foreach (var t in trs) if (!t.gameObject.activeSelf) t.gameObject.SetActive(true);
+    }
+
+    public void ShowGameOver(string reason, int finalScore)
+    {
+        if (forgeButton) forgeButton.interactable = false;
+        if (deliverButton) deliverButton.interactable = false;
+
+        if (gameOverPanel)
+        {
+            gameOverPanel.SetActive(true);
+            gameOverPanel.transform.SetAsLastSibling();
+        }
+
+        if (gameOverText) gameOverText.text = "You lost\n(" + reason + ")\nScore: " + finalScore;
+
+        if (restartButton)
+        {
+            restartButton.onClick.RemoveAllListeners();
+            restartButton.onClick.AddListener(() =>
+            {
+                if (manager != null) manager.Restart();
+            });
+        }
+    }
+
+    public void HideGameOver()
+    {
+        if (gameOverPanel) gameOverPanel.SetActive(false);
     }
 }

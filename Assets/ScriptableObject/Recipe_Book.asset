@@ -173,3 +173,307 @@ MonoBehaviour:
     - {fileID: 0}
     Points: 15
     TimeLimit: 10
+  - ResultName: Wood Sword
+    ResultSprite: {fileID: -8276234610682436239, guid: c2a298f7df65c62479d6ffc01e858058, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Stone Sword
+    ResultSprite: {fileID: 6740376400878639873, guid: e32af336585c2314c83203df14d9f17d, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Iron Sword
+    ResultSprite: {fileID: -5682899358266237846, guid: 06ce925ce2573214688c887bd50fedbe, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 7a41b0dc8afbec643b6fb0a3b48941db, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 7a41b0dc8afbec643b6fb0a3b48941db, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Golden Sword
+    ResultSprite: {fileID: -8768383761000539330, guid: f7962db4395221942819a5cf04482e89, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Diamond Sword
+    ResultSprite: {fileID: -5371265621071371437, guid: 973f18cf73c816440942f4c3a7b70538, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Wood Shovel
+    ResultSprite: {fileID: -4906887308045457483, guid: 345de951e53bdbd418efc89c1d9de6d7, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Stone Shovel
+    ResultSprite: {fileID: -3953668432654339907, guid: 64e0dea2ae4aa964aa3e375fc79377e5, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Iron Shovel
+    ResultSprite: {fileID: -6550695035297350611, guid: 6287327ba5558e543889359a13e6958e, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 7a41b0dc8afbec643b6fb0a3b48941db, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Golden Shovel
+    ResultSprite: {fileID: 6848727754091443694, guid: 64c7b4a8f564fbe41a129385b2d54b86, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Diamond Shovel
+    ResultSprite: {fileID: 9037903409312229848, guid: 4c82ea9fbcb8985489408391f7dbf8a2, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Wood Axe
+    ResultSprite: {fileID: 5010787112377136037, guid: 2901295c1c6f1e64597806b43c9306c6, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: a2064bb419d5ab648af68816b1a5af78, type: 2}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Stone Axe
+    ResultSprite: {fileID: 3691215689346329076, guid: ca175bff537e69f4cbb590c01cef3485, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 3eb970d89201fce4c8deadcf5ceb8cd7, type: 2}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Iron Axe
+    ResultSprite: {fileID: -5826158723577688099, guid: 9edaab867a5b36042845af28d699795b, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 7a41b0dc8afbec643b6fb0a3b48941db, type: 2}
+    - {fileID: 11400000, guid: 7a41b0dc8afbec643b6fb0a3b48941db, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 7a41b0dc8afbec643b6fb0a3b48941db, type: 2}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Golden Axe
+    ResultSprite: {fileID: 6682009064416085832, guid: 0ea31e43fbf2cb045b478b2761dbf21e, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6f6e86381d8f9d745864b7ed1b198134, type: 2}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Diamond Axe
+    ResultSprite: {fileID: -5784698320706525490, guid: 9acd01282bbadbd43a779621fb2a4352, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: d513eac7e54406d4faaca7c16b083b50, type: 2}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 35613820405878a4bbf8860f4b88c8c6, type: 2}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Leather Helmet
+    ResultSprite: {fileID: -5044915312820944817, guid: 246da8e074a65b243a07790d18fbb196, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Leather Chestplate
+    ResultSprite: {fileID: 972524890855885471, guid: d8415ab5d8fb8a84e82fa06227851ad2, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Leather Leggings
+    ResultSprite: {fileID: -4279965008064457319, guid: 2769a6775f93e6a469523afa1b163675, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    Points: 15
+    TimeLimit: 10
+  - ResultName: Leather Boots
+    ResultSprite: {fileID: -2006058706, guid: 806ccfa2686a555468a87c9af3c4d49d, type: 3}
+    Width: 3
+    Height: 3
+    Pattern:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 6c46c4c5c058ff34c86f207b30765303, type: 2}
+    Points: 15
+    TimeLimit: 10
